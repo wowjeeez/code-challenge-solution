@@ -1,5 +1,6 @@
 use std::any::type_name;
 use std::fmt;
+use std::fs::File;
 
 use std::str::FromStr;
 use crate::account::AccountStorage;
@@ -25,7 +26,8 @@ fn main() {
     let args: Vec<String> = std::env::args().collect();
     let input = args.get(1).expect("expected input file");
     let mut accounts = AccountStorage::new();
-    let mut rdr = csv::ReaderBuilder::new().flexible(true).has_headers(false).from_path(input).expect("failed to create reader (file probably doesnt exist)");
+                                                                                                                //any stream that implements io::Read can be passed here
+    let mut rdr = csv::ReaderBuilder::new().flexible(true).has_headers(false).from_reader(File::open(input).expect("failed to read file"));
     let mut hd_passed = false;
     for res in rdr.records() {
         if hd_passed {
