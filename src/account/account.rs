@@ -1,3 +1,4 @@
+//File providing core data structures and methods for account/transaction handling, including both high and low level abstractions
 use std::io;
 use crate::transactions::Transaction;
 use crate::account::manager::AccountManager;
