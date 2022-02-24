@@ -4,7 +4,7 @@ pub enum TRANSACTION {
     WITHDRAW,
     DISPUTE,
     RESOLVE,
-    CHARGEBACK
+    CHARGEBACK,
 }
 
 impl TRANSACTION {
@@ -15,7 +15,7 @@ impl TRANSACTION {
             "dispute" => TRANSACTION::DISPUTE,
             "resolve" => TRANSACTION::RESOLVE,
             "chargeback" => TRANSACTION::CHARGEBACK,
-            _ => panic!("Invalid transaction type: {}", str)
+            _ => panic!("Invalid transaction type: {}", str),
         }
     }
     pub fn create(self, client_id: u16, id: u32, amount: f64) -> Transaction {
@@ -29,7 +29,7 @@ pub struct Transaction {
     pub account: u16,
     pub id: u32,
     pub amount: f64, //on modern PCs similar perf and more precision
-    pub is_disp: bool
+    pub is_disp: bool,
 }
 
 impl Transaction {
@@ -39,7 +39,7 @@ impl Transaction {
             account: client_id,
             id,
             amount,
-            is_disp: false
+            is_disp: false,
         }
     }
 }

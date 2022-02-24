@@ -4,11 +4,11 @@ use crate::account::account::Account;
 use crate::transactions::Transaction;
 
 pub struct AccountManager<'t> {
-    inner: &'t mut Account
+    inner: &'t mut Account,
 }
 impl AccountManager<'_> {
     pub fn new(acc: &mut Account) -> AccountManager {
-        AccountManager {inner: acc}
+        AccountManager { inner: acc }
     }
     pub fn deposit(&mut self, trans: &Transaction) {
         let to_add = trans.amount;
@@ -33,7 +33,6 @@ impl AccountManager<'_> {
                 self.inner.held -= to_res;
             }
         }
-
     }
     pub fn chargeback(&mut self, trans: &Transaction) {
         let trans_ref_res = self.inner.get_transaction(trans.id);
@@ -46,7 +45,6 @@ impl AccountManager<'_> {
                 self.inner.locked = true;
             }
         }
-
     }
     pub fn dispute(&mut self, trans: &Transaction) {
         let trans_ref_res = self.inner.get_transaction(trans.id);
